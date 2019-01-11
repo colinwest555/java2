@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Quiz</title>
+</head>
+
+<body>
+
+
+    <p> Time left: <span id="countdowntimer">30 </span> Seconds</p>
+
+
+
+
+
+
+    <div id="quiz"></div>
+    <button id="start">start</button>
+    <button id="submit">Get Results</button>
+    <div id="results"></div>
+
+
+
+    <script type="text/javascript">
+        var timeleft = 30;
+        var timesUp = "times up"
+        var downloadTimer = setInterval(function () {
+            timeleft--;
+            document.getElementById("countdowntimer").textContent = timeleft;
+            if (timeleft === 0)
+                clearInterval(downloadTimer);
+        }, 1000);
+
+
+
+        var myQuestions = [
+            {
+                question: "What is the capital of Texas?",
+                answers: {
+                    a: 'Houston',
+                    b: 'Austin',
+                    c: 'Dallas'
+                },
+                correctAnswer: 'b'
+            },
+            {
+                question: "In which city is SMU located",
+                answers: {
+                    a: 'Austin',
+                    b: 'Lubock',
+                    c: 'Dallas'
+                },
+                correctAnswer: 'c'
+            }
+            ,
+            {
+                question: "Where do the NFl football team The Cowboys Play",
+                answers: {
+                    a: 'Dallas',
+                    b: 'Arlington',
+                    c: 'Austin'
+                },
+                correctAnswer: 'b'
+            }
+            ,
+            {
+                question: "What year did Texas become a part of the united states",
+                answers: {
+                    a: '1845',
+                    b: '1903',
+                    c: '1865'
+                },
+                correctAnswer: 'a'
+            }
+            ,
+            {
+                question: "Who is the governor of Texas",
+                answers: {
+                    a: 'Ted Cruz',
+                    b: 'Bernie Sanders',
+                    c: 'Greg Abbott'
+                },
+                correctAnswer: 'c'
+            }
+            ,
+            {
+                question: "How many electoral votes are in Texas",
+                answers: {
+                    a: '38',
+                    b: '43',
+                    c: '23'
+                },
+                correctAnswer: 'a'
+            }
+            ,
+            {
+                question: "What is the most populated city in Texas",
+                answers: {
+                    a: 'Houston',
+                    b: 'Dallas',
+                    c: 'Austin'
+                },
+                correctAnswer: 'a'
+            }
+            ,
+            {
+                question: "what is the best state in the united states",
+                answers: {
+                    a: 'TEXAS',
+                    b: 'florida',
+                    c: 'idaho'
+                },
+                correctAnswer: 'a'
+            }
+            ,
+            {
+                question: "How many cities are in Texas",
+                answers: {
+                    a: '1254',
+                    b: '961',
+                    c: '1187'
+                },
+                correctAnswer: 'b'
+            }
+            ,
+            {
+                question: "how many presidents were born in Texas",
+                answers: {
+                    a: '4',
+                    b: '6',
+                    c: '2'
+                },
+                correctAnswer: 'c'
+            }
+        ];
+
+        var quizContainer = document.getElementById('quiz');
+        var resultsContainer = document.getElementById('results');
+        var startButton = document.getElementById('start')
+        var submitButton = document.getElementById('submit');
+
+        quiz(myQuestions, quizContainer, resultsContainer, submitButton);
+
+        function quiz(questions, quizContainer, resultsContainer, submitButton) {
+
+            function showQuestions(questions, quizContainer) {
+
+                var output = [];
+                var answers;
+
+
+                for (var i = 0; i < questions.length; i++) {
+
+
+                    answers = [];
+
+
+                    for (letter in questions[i].answers) {
+
+
+                        answers.push(
+                            '<label>'
+                            + '<input type="radio" name="question' + i + '" value="' + letter + '">'
+                            + letter + ': '
+                            + questions[i].answers[letter]
+                            + '</label>'
+                        );
+                    }
+
+
+                    output.push(
+                        '<div class="question">' + questions[i].question + '</div>'
+                        + '<div class="answers">' + answers.join('') + '</div>'
+                    );
+                }
+
+
+                quizContainer.innerHTML = output.join('');
+            }
+
+
+            function showResults(questions, quizContainer, resultsContainer) {
+
+
+                var answerContainers = quizContainer.querySelectorAll('.answers');
+
+
+                var userAnswer = '';
+                var numCorrect = 0;
+
+
+                for (var i = 0; i < questions.length; i++) {
+
+
+                    userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
+
+                    if (userAnswer === questions[i].correctAnswer) {
+
+                        numCorrect++;
+
+
+                        answerContainers[i].style.color = 'lightgreen';
+                    }
+
+                    else {
+
+                        answerContainers[i].style.color = 'red';
+                    }
+                }
+
+
+                resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+            }
+
+            showQuestions(questions, quizContainer);
+
+
+            submitButton.onclick = function () {
+                showResults(questions, quizContainer, resultsContainer);
+
+
+
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>
