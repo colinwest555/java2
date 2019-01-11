@@ -4,10 +4,11 @@
 
 <head>
     <title>Quiz</title>
+   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
+<div class="container">
 
     <p> Time left: <span id="countdowntimer">30 </span> Seconds</p>
 
@@ -22,16 +23,9 @@
     <div id="results"></div>
 
 
-
+</div>
     <script type="text/javascript">
-        var timeleft = 30;
-        var timesUp = "times up"
-        var downloadTimer = setInterval(function () {
-            timeleft--;
-            document.getElementById("countdowntimer").textContent = timeleft;
-            if (timeleft === 0)
-                clearInterval(downloadTimer);
-        }, 1000);
+        
 
 
 
@@ -41,7 +35,8 @@
                 answers: {
                     a: 'Houston',
                     b: 'Austin',
-                    c: 'Dallas'
+                    c: 'Dallas',
+                    d: 'Lubbock'
                 },
                 correctAnswer: 'b'
             },
@@ -50,7 +45,8 @@
                 answers: {
                     a: 'Austin',
                     b: 'Lubock',
-                    c: 'Dallas'
+                    c: 'Dallas',
+                    d: ' Garland'
                 },
                 correctAnswer: 'c'
             }
@@ -60,7 +56,8 @@
                 answers: {
                     a: 'Dallas',
                     b: 'Arlington',
-                    c: 'Austin'
+                    c: 'Austin',
+                    d: 'Houston'
                 },
                 correctAnswer: 'b'
             }
@@ -70,7 +67,8 @@
                 answers: {
                     a: '1845',
                     b: '1903',
-                    c: '1865'
+                    c: '1865',
+                    d: '1896'
                 },
                 correctAnswer: 'a'
             }
@@ -80,7 +78,8 @@
                 answers: {
                     a: 'Ted Cruz',
                     b: 'Bernie Sanders',
-                    c: 'Greg Abbott'
+                    c: 'Greg Abbott',
+                    d: 'Chris LeBlanc'
                 },
                 correctAnswer: 'c'
             }
@@ -90,7 +89,8 @@
                 answers: {
                     a: '38',
                     b: '43',
-                    c: '23'
+                    c: '23',
+                    d: '32'
                 },
                 correctAnswer: 'a'
             }
@@ -100,7 +100,8 @@
                 answers: {
                     a: 'Houston',
                     b: 'Dallas',
-                    c: 'Austin'
+                    c: 'Austin',
+                    d: 'Galveston'
                 },
                 correctAnswer: 'a'
             }
@@ -110,7 +111,8 @@
                 answers: {
                     a: 'TEXAS',
                     b: 'florida',
-                    c: 'idaho'
+                    c: 'idaho',
+                    d: 'any other state'
                 },
                 correctAnswer: 'a'
             }
@@ -120,7 +122,8 @@
                 answers: {
                     a: '1254',
                     b: '961',
-                    c: '1187'
+                    c: '1187',
+                    d: '883'
                 },
                 correctAnswer: 'b'
             }
@@ -130,7 +133,8 @@
                 answers: {
                     a: '4',
                     b: '6',
-                    c: '2'
+                    c: '2',
+                    d: '5'
                 },
                 correctAnswer: 'c'
             }
@@ -201,12 +205,13 @@
                         numCorrect++;
 
 
-                        answerContainers[i].style.color = 'lightgreen';
+                        answerContainers[i].style.color = 'green';
                     }
 
                     else {
-
+                        
                         answerContainers[i].style.color = 'red';
+                        
                     }
                 }
 
@@ -223,6 +228,22 @@
 
 
             }
+            
+            //timer works but function does not 
+            var timeleft = 30;
+        var timesUp = "times up"
+        var downloadTimer = setInterval(function () {
+            timeleft--;
+            document.getElementById("countdowntimer").textContent = timeleft;
+            if (timeleft === 0)
+                clearInterval(downloadTimer);
+        }, 1000);
+
+           function display() {
+               if (timeLeft===0){
+                showResults(questions, quizContainer, resultsContainer);
+               }
+           }
 
         }
     </script>
